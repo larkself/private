@@ -2,7 +2,7 @@
 
 ## GitHub repo tree script
 
-Script: `list_larkself_repo_tree.py`
+Script: `list_repo_tree/list_larkself_repo_tree.py`
 
 Input range format: `YYYYMMDD~YYYYMMDD` (also supports `YYYY-MM-DD~YYYY-MM-DD`).
 
@@ -12,7 +12,7 @@ Input range format: `YYYYMMDD~YYYYMMDD` (also supports `YYYY-MM-DD~YYYY-MM-DD`).
 2. Run:
 
 ```bash
-cd /Users/yishwu/Code/gp-workspace/private
+cd /Users/yishwu/Code/gp-workspace/private/list_repo_tree
 ./list_larkself_repo_tree.py 20260101~20260313 --output ./repo_tree_2026_q1.txt
 ```
 
@@ -24,7 +24,7 @@ Output format:
 
 Optional flags:
 - `--owner larkself`
-- `--env-file .env`
+- `--env-file /path/to/.env` (optional override; defaults to `private/.env`)
 - `--max-repos 10`
 - `--workers 12` (increase concurrency for faster runs)
 - `--cache-file .repo_tree_cache.json` (cache results to speed repeated runs)

@@ -3,7 +3,7 @@
 
 Examples:
   python list_larkself_repo_tree.py 20260101~20260313
-  python list_larkself_repo_tree.py 2026-01-01~2026-03-13 --owner larkself --env-file .env
+  python list_larkself_repo_tree.py 2026-01-01~2026-03-13 --owner larkself
 """
 
 from __future__ import annotations
@@ -25,6 +25,9 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 API_BASE = "https://api.github.com"
+SCRIPT_DIR = Path(__file__).resolve().parent
+DEFAULT_ENV_FILE = SCRIPT_DIR.parent / ".env"
+DEFAULT_CACHE_FILE = SCRIPT_DIR / ".repo_tree_cache.json"
 
 try:
     import certifi
@@ -474,7 +477,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     )
     parser.add_argument(
         "--env-file",
-        default=".env",
+        default=str(DEFAULT_ENV_FILE),
         help="Path to .env file containing GITHUB_PAT / GITHUB_TOKEN / GH_TOKEN.",
     )
     parser.add_argument(
@@ -496,7 +499,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     )
     parser.add_argument(
         "--cache-file",
-        default=".repo_tree_cache.json",
+        default=str(DEFAULT_CACHE_FILE),
         help="Local cache file to speed up repeated runs.",
     )
     parser.add_argument(
