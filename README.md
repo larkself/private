@@ -13,7 +13,7 @@ Input range format: `YYYYMMDD~YYYYMMDD` (also supports `YYYY-MM-DD~YYYY-MM-DD`).
 
 ```bash
 cd /Users/yishwu/Code/gp-workspace/private/list_repo_tree
-./list_larkself_repo_tree.py 20260101~20260313 --output ./repo_tree_2026_q1.txt
+./list_larkself_repo_tree.py 20260301~20260313 --output ./repo_tree_2026_m3.txt
 ```
 
 Output format:
@@ -30,6 +30,38 @@ Optional flags:
 - `--cache-file .repo_tree_cache.json` (cache results to speed repeated runs)
 - `--repo-cache-ttl 600` (reuse cached repo list for 10 minutes)
 - `--no-cache` (disable cache)
+
+## gp-features tree stat
+
+Script: `list_repo_tree/stat_gp_features_tree.py`
+
+Purpose: count folder structure and file totals for one repo
+(default `larkself/gp-features`).
+Also analyzes missing trading dates under `base/pankou` by year
+against `stock-grabber/data/trade_date.json`.
+Today/future trade dates are excluded from missing-date counting.
+
+```bash
+cd /Users/yishwu/Code/gp-workspace/private/list_repo_tree
+./stat_gp_features_tree.py --owner larkself --repo gp-features --ref main \
+  --max-depth 3 --output ./gp_features_tree_stat.txt
+```
+
+Output header example:
+- `repo=larkself/gp-features ref=main`
+- `total_files=124`
+- `root_direct_files=1`
+- Directory tree lines: `base/ files=123`
+
+Optional flags:
+- `--owner larkself`
+- `--repo gp-features`
+- `--ref main`
+- `--env-file /path/to/.env` (optional override; defaults to `private/.env`)
+- `--max-depth 3`
+- `--trade-date-json /Users/yishwu/Code/gp-workspace/stock-grabber/data/trade_date.json`
+- `--skip-pankou-missing` (only print tree stat, skip missing-date analysis)
+- `--output ./gp_features_tree_stat.txt`
 
 ## Local basic pankou extraction smoke test
 
